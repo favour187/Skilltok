@@ -1,0 +1,20 @@
+{
+  "name": "SkillTok - Video Feed & Freelance Marketplace",
+  "short_name": "SkillTok",
+  "description": "TikTok-style video feed for hiring verified freelancers in Nigeria & globally",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#06b6d4",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/skilltok-logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "social", "productivity"],
+  "lang": "en"
+}
