@@ -12,6 +12,10 @@ buildscript {
 apply from: "variables.gradle"
 
 allprojects {
+	repositories {
+	google()
+	mavenCentral()
+	}
     configurations.all {
         exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk7"
         exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk8"
