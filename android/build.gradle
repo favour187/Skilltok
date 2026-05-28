@@ -6,7 +6,11 @@ buildscript {
         google()
         mavenCentral()
     }
-    dependencies {
+    configurations.all
+	exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk7"
+	exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk8"
+}
+	dependencies {
         classpath 'com.android.tools.build:gradle:8.7.2'
         classpath 'com.google.gms:google-services:4.4.2'
 
