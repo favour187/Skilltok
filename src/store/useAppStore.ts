@@ -53,7 +53,7 @@ interface AppState {
   user: User | null;
   isAuthenticated: boolean;
   login: (email: string, password: string, role?: Role) => boolean;
-  loginWithOAuth: (provider: 'google' | 'github' | 'linkedin') => void;
+  loginWithOAuth: (provider: 'google' | 'github' | 'linkedin') => Promise<void>;
   register: (name: string, email: string, password: string, role: Role, adminSecret?: string) => void;
   logout: () => void;
   updateUserPlan: (plan: PlanType) => void;
@@ -150,14 +150,19 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   // ── OAuth: redirect to backend OAuth endpoint ──
-  loginWithOAuth: (provider) => {
+  loginWithOAuth: async (provider) => {
+    const { Browser } = await import('@capacitor/browser');
     const backendUrl =
       (import.meta as any).env?.VITE_BACKEND_URL ||
       (import.meta as any).env?.VITE_API_URL ||
       localStorage.getItem('skilltok_backend_url_override') ||
       'https://skilltok-backend-production.up.railway.app';
-    // Backend handles the OAuth flow and redirects back with a token
-    window.location.href = `${backendUrl}/api/auth/${provider}`;
+    const isNative = (window as any).Capacitor?.isNativePlatform?.();
+    if (isNative) {
+      await Browser.open({ url: `${backendUrl}/api/auth/${provider}` });
+    } else {
+      window.location.href = `${backendUrl}/api/auth/${provider}`;
+    }
   },
 
   register: (name, email, password, role, adminSecret) => {
