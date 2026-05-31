@@ -7,7 +7,7 @@ import { Router, Request, Response } from 'express';
 const router = Router();
 
 const GROK_API_URL = 'https://api.x.ai/v1/chat/completions';
-const GROK_MODEL = 'grok-3';
+const GROK_MODEL = 'grok-4.3';
 
 async function callGrok(apiKey: string, systemPrompt: string, userPrompt: string): Promise<string> {
   const response = await fetch(GROK_API_URL, {
