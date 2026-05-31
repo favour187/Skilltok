@@ -59,7 +59,15 @@ async function upsertOAuthUser(profile: {
 
 // ─── Helper: redirect to frontend with token or error ───────────────────────
 function redirectWithToken(res: Response, token: string) {
-  res.redirect(`${FRONTEND_URL}?oauth_token=${token}`);
+  // Try deep link first (native app), fallback to web
+  res.send(`
+    <html><body><script>
+      var deep = "com.skilltok.app://oauth?token=${token}";
+      var web = "${FRONTEND_URL}?oauth_token=${token}";
+      window.location = deep;
+      setTimeout(function(){ window.location = web; }, 1500);
+    </script></body></html>
+  `);
 }
 function redirectWithError(res: Response, msg: string) {
   res.redirect(`${FRONTEND_URL}?oauth_error=${encodeURIComponent(msg)}`);
