@@ -159,6 +159,8 @@ async function initDatabase() {
         is_deleted BOOLEAN DEFAULT false,
         created_at TIMESTAMP DEFAULT NOW()
       );
+      ALTER TABLE video_comments ADD COLUMN IF NOT EXISTS is_deleted BOOLEAN DEFAULT false;
+
       CREATE INDEX IF NOT EXISTS idx_comments_video ON video_comments(video_id);
       CREATE INDEX IF NOT EXISTS idx_comments_user ON video_comments(user_id);
       
