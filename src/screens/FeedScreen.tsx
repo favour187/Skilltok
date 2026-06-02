@@ -3,6 +3,7 @@ import { useTranslation } from '../utils/useTranslation';
 import { useAppStore } from '../store/useAppStore';
 import { formatCurrency } from '../utils/feeCalculator';
 import { Heart, MessageCircle, Share2, Bookmark, ShieldAlert, Volume2, VolumeX, Play, ChevronUp, ChevronDown, CheckCircle2, ShoppingBag, ArrowRight, UserPlus, Check } from 'lucide-react';
+import { showInterstitialAd } from '../services/admob';
 
 export const FeedScreen: React.FC = () => {
   const { 
@@ -36,6 +37,7 @@ export const FeedScreen: React.FC = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const touchStartY = useRef<number | null>(null);
   const isTransitioning = useRef<boolean>(false);
+  const swipeCountRef = useRef(0);
 
   // Filter videos by search query and category
   const filteredVideos = videos.filter(vid => {
@@ -82,20 +84,28 @@ export const FeedScreen: React.FC = () => {
   }, [currentIndex]);
 
   const handleNext = () => {
-    if (currentIndex < filteredVideos.length - 1) {
-      const next = currentIndex + 1;
-      sessionStorage.setItem('feed_index', String(next));
-      setCurrentIndex(next);
+  if (currentIndex < filteredVideos.length - 1) {
+    const next = currentIndex + 1;
+    sessionStorage.setItem('feed_index', String(next));
+    setCurrentIndex(next);
+    swipeCountRef.current += 1;
+    if (swipeCountRef.current % 5 === 0) {
+      showInterstitialAd();
     }
-  };
+  }
+};
 
   const handlePrev = () => {
-    if (currentIndex > 0) {
-      const prev = currentIndex - 1;
-      sessionStorage.setItem('feed_index', String(prev));
-      setCurrentIndex(prev);
+  if (currentIndex > 0) {
+    const prev = currentIndex - 1;
+    sessionStorage.setItem('feed_index', String(prev));
+    setCurrentIndex(prev);
+    swipeCountRef.current += 1;
+    if (swipeCountRef.current % 5 === 0) {
+      showInterstitialAd();
     }
-  };
+  }
+};
 
   // TikTok-style mouse wheel and swipe vertical scrolling!
   const handleWheel = (e: React.WheelEvent) => {

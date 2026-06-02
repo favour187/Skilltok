@@ -178,7 +178,7 @@ export const DashboardScreen: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 self-start sm:self-center">
+          <div className="flex flex-wrap items-center gap-2 self-start sm:self-center">
             <button
               onClick={() => setShowPayoutModal(true)}
               className="px-5 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs rounded-2xl flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20 active:scale-95 whitespace-nowrap"
@@ -451,7 +451,7 @@ export const DashboardScreen: React.FC = () => {
         {/* DELIVERY PROOF SUBMISSION MODAL */}
         {activeFulfillmentModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden text-white">
+            <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh] text-white">
               <div className="p-6 bg-gradient-to-r from-indigo-950/60 via-slate-900 to-slate-900 border-b border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 border border-indigo-500/20">
@@ -553,7 +553,7 @@ export const DashboardScreen: React.FC = () => {
         {/* WITHDRAW FUNDS PAYOUT MODAL */}
         {showPayoutModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden text-white">
+            <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-y-auto max-h-[90vh] text-white">
               <div className="p-6 bg-gradient-to-r from-emerald-950/60 via-slate-900 to-slate-900 border-b border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
