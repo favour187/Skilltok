@@ -9,8 +9,15 @@ initializeAdMob().then(async () => {
   await prepareAppOpenAd();
   await prepareInterstitialAd();
   setTimeout(async () => {
-    await showAppOpenAd();
-  }, 2000);
+    try {
+      await showAppOpenAd();
+    } catch (e) {
+      console.warn('App open ad skipped:', e);
+    }
+      }, 2000);
+} catch (e) {
+  console.warn('AdMob init skipped:', e);
+}
 });
 
 createRoot(document.getElementById("root")!).render(
