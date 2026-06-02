@@ -7,8 +7,10 @@ import { initializeAdMob, prepareAppOpenAd, showAppOpenAd, prepareInterstitialAd
 
 initializeAdMob().then(async () => {
   await prepareAppOpenAd();
-  await showAppOpenAd();
   await prepareInterstitialAd();
+  setTimeout(async () => {
+    await showAppOpenAd();
+  }, 2000);
 });
 
 createRoot(document.getElementById("root")!).render(
